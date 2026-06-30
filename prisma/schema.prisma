@@ -1,0 +1,93 @@
+// Prisma schema for squad-aim-trainer.
+// Auth models mirror NextAuth.js v5 + the Prisma adapter conventions, plus
+// a `Score` model that records aim-trainer runs for the leaderboard.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  PLAYER
+  ADMIN
+  SUPER_ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  // Steam linkage — populated when the user signs in with Steam OpenID
+  // (or later links their Steam account from /me). Unique so we can find
+  // an existing user from the SteamID64 returned by the OpenID callback.
+  steamId       String?   @unique
+  role          Role      @default(PLAYER)
+  banned        Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+  scores   Score[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  // For the "local" provider this column holds the bcrypt password hash
+  // (re-using the existing column avoids a schema change).
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Per-user best score. Only signed-in users are persisted — the leaderboard
+// always shows a known identity. New runs upsert when they beat the existing
+// best (see /api/leaderboard POST).
+model Score {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  points           Int
+  hits             Int
+  misses           Int
+  accuracy         Float
+  avgReactionTime  Int
+  bestReactionTime Int
+  achievedAt       DateTime @default(now())
+
+  @@index([points])
+}

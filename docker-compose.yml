@@ -1,0 +1,48 @@
+services:
+  web:
+    build: .
+    container_name: squad-aim-trainer
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://aim:${POSTGRES_PASSWORD:-changeme}@db:5432/aim?schema=public
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      # Provider toggles — set the ones you want to enable.
+      AUTH_DISCORD: ${AUTH_DISCORD:-false}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID:-}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET:-}
+      AUTH_GITHUB: ${AUTH_GITHUB:-false}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      AUTH_GOOGLE: ${AUTH_GOOGLE:-false}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      AUTH_STEAM: ${AUTH_STEAM:-false}
+      STEAM_API_KEY: ${STEAM_API_KEY:-}
+      AUTH_LOCAL: ${AUTH_LOCAL:-false}
+      # First sign-in with this email is auto-promoted to SUPER_ADMIN.
+      ADMIN_BOOTSTRAP_EMAIL: ${ADMIN_BOOTSTRAP_EMAIL:-}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    container_name: squad-aim-trainer-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aim
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_DB: aim
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aim -d aim"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db-data:
