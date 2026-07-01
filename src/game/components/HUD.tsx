@@ -1,6 +1,6 @@
 "use client";
 
-import type { GameState } from "@/lib/game-types";
+import type { GameState } from "../game-types";
 
 interface HUDProps {
   state: GameState;

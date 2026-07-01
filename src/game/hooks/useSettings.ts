@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import type { GameSettings } from "@/lib/game-types";
-import { DEFAULT_SENSITIVITY, DEFAULT_FOV, DEFAULT_DPI } from "@/lib/game-config";
+import type { GameSettings } from "../game-types";
+import { DEFAULT_SENSITIVITY, DEFAULT_FOV, DEFAULT_DPI } from "../game-config";
 
 const STORAGE_KEY = "saf-aim-settings";
 

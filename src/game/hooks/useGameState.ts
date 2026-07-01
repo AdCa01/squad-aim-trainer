@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducer, useCallback } from "react";
-import type { GameState, GameAction, GameStats } from "@/lib/game-types";
+import type { GameState, GameAction, GameStats } from "../game-types";
 import {
   GAME_DURATION,
   COUNTDOWN_FROM,
@@ -10,7 +10,7 @@ import {
   FAST_REACTION_THRESHOLD,
   getDifficultyProgress,
   getDifficultyMultiplier,
-} from "@/lib/game-config";
+} from "../game-config";
 
 const initialState: GameState = {
   phase: "idle",

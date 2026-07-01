@@ -1,8 +1,25 @@
 {
   "name": "squad-aim-trainer",
-  "version": "0.1.0",
-  "private": true,
-  "description": "3D aim trainer for Squad players, with multi-provider auth and a global leaderboard. MIT.",
+  "version": "0.2.0",
+  "description": "3D aim trainer for Squad players, with multi-provider auth and a global leaderboard. Dual-purpose: run as a standalone Next.js app OR import the game components/hooks into any Next.js project via the `./game` export. MIT.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdCa01/squad-aim-trainer.git"
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "exports": {
+    "./game": {
+      "types": "./src/game/index.ts",
+      "default": "./src/game/index.ts"
+    },
+    "./game/styles.css": "./src/game/styles.css"
+  },
+  "files": [
+    "src/game",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
@@ -12,28 +29,38 @@
     "prisma:push": "prisma db push --skip-generate",
     "prisma:migrate": "prisma migrate deploy"
   },
+  "peerDependencies": {
+    "@react-three/drei": ">=10",
+    "@react-three/fiber": ">=9",
+    "framer-motion": ">=11",
+    "next": ">=15",
+    "react": ">=19",
+    "react-dom": ">=19",
+    "three": ">=0.180"
+  },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.0",
     "@prisma/client": "^6.1.0",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.5.0",
     "bcryptjs": "^2.4.3",
-    "next": "^15.1.0",
-    "next-auth": "5.0.0-beta.25",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "three": "^0.183.2"
+    "next-auth": "5.0.0-beta.25"
   },
   "devDependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.183.1",
     "autoprefixer": "^10.4.20",
+    "framer-motion": "^11.15.0",
+    "next": "^15.1.0",
     "postcss": "^8.5.1",
     "prisma": "^6.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tailwindcss": "^3.4.16",
+    "three": "^0.183.2",
     "typescript": "^5.7.0"
   }
 }

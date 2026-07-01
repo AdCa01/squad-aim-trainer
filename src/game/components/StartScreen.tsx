@@ -3,9 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useSession, signIn } from "next-auth/react";
-import type { GameState, GameAction } from "@/lib/game-types";
-import type { GameSettings } from "@/lib/game-types";
-import type { LeaderboardEntry } from "@/lib/game-types";
+import type { GameState, GameAction } from "../game-types";
+import type { GameSettings } from "../game-types";
+import type { LeaderboardEntry } from "../game-types";
 import Link from "next/link";
 import SettingsPanel from "./SettingsPanel";
 

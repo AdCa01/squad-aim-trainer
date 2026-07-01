@@ -1,0 +1,111 @@
+/**
+ * Aim-trainer styles — crosshair, slider thumb.
+ *
+ * All accent colours flow through the `--aim-accent` CSS custom property
+ * (default: SAF blue). Consumers can re-theme in a single line by setting
+ * the variable at any parent scope, e.g. in their global stylesheet:
+ *
+ *   :root { --aim-accent: #f6b73e; --aim-accent-rgb: 246, 183, 62; }
+ *
+ * `--aim-accent-rgb` is used for glow/`rgba()` shadows — it must match
+ * `--aim-accent` (there's no CSS-native way to derive one from the other).
+ */
+
+:root {
+  --aim-accent: #2f67b2;
+  --aim-accent-rgb: 47, 103, 178;
+}
+
+.aim-crosshair {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  pointer-events: none;
+}
+
+.aim-crosshair-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--aim-accent);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px rgba(var(--aim-accent-rgb), 0.8);
+}
+
+.aim-crosshair-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.aim-crosshair-top {
+  width: 2px;
+  height: 12px;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.aim-crosshair-bottom {
+  width: 2px;
+  height: 12px;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.aim-crosshair-left {
+  width: 12px;
+  height: 2px;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.aim-crosshair-right {
+  width: 12px;
+  height: 2px;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Aim Trainer — Slider */
+.aim-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.aim-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--aim-accent);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(var(--aim-accent-rgb), 0.4);
+  transition: box-shadow 0.2s;
+}
+
+.aim-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 20px rgba(var(--aim-accent-rgb), 0.6);
+}
+
+.aim-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--aim-accent);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px rgba(var(--aim-accent-rgb), 0.4);
+}

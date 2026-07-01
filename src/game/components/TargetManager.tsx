@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-import type { GameState, GameAction, Target as TargetType } from "@/lib/game-types";
+import type { GameState, GameAction, Target as TargetType } from "../game-types";
 import {
   MAX_TARGETS,
   SPAWN_AREA,
@@ -9,7 +9,7 @@ import {
   getSpawnInterval,
   getTargetRadius,
   getTargetSpeed,
-} from "@/lib/game-config";
+} from "../game-config";
 import Target from "./Target";
 
 interface TargetManagerProps {

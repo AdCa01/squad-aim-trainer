@@ -2,19 +2,21 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
-import { useGameState } from "@/hooks/useGameState";
-import { usePointerLock } from "@/hooks/usePointerLock";
-import { useSettings } from "@/hooks/useSettings";
-import { useLeaderboard } from "@/hooks/useLeaderboard";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import Crosshair from "@/components/aim-trainer/Crosshair";
-import HUD from "@/components/aim-trainer/HUD";
-import StartScreen from "@/components/aim-trainer/StartScreen";
-import EndScreen from "@/components/aim-trainer/EndScreen";
-import MobileBlocker from "@/components/aim-trainer/MobileBlocker";
+import {
+  useGameState,
+  usePointerLock,
+  useSettings,
+  useLeaderboard,
+  useIsMobile,
+  Crosshair,
+  HUD,
+  StartScreen,
+  EndScreen,
+  MobileBlocker,
+} from "@/game";
 import Navbar from "@/components/layout/Navbar";
 
-const GameCanvas = dynamic(() => import("@/components/aim-trainer/GameCanvas"), {
+const GameCanvas = dynamic(() => import("@/game/components/GameCanvas"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full bg-saf-dark flex items-center justify-center">

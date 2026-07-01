@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import type { Mesh } from "three";
-import type { Target as TargetType } from "@/lib/game-types";
-import { SPAWN_AREA } from "@/lib/game-config";
+import type { Target as TargetType } from "../game-types";
+import { SPAWN_AREA } from "../game-config";
 
 interface TargetProps {
   target: TargetType;
