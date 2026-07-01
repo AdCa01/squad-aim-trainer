@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import type { LeaderboardEntry, GameStats } from "@/lib/game-types";
+import type { LeaderboardEntry, GameStats } from "../game-types";
 
 export function useLeaderboard() {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);

@@ -2,8 +2,8 @@
 
 import { useRef, useCallback, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import type { GameState, GameAction } from "@/lib/game-types";
-import type { GameSettings } from "@/lib/game-types";
+import type { GameState, GameAction } from "../game-types";
+import type { GameSettings } from "../game-types";
 import GameScene from "./GameScene";
 
 interface GameCanvasProps {

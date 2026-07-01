@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useSession, signIn } from "next-auth/react";
-import type { GameStats, GameAction } from "@/lib/game-types";
+import type { GameStats, GameAction } from "../game-types";
 
 interface EndScreenProps {
   stats: GameStats;

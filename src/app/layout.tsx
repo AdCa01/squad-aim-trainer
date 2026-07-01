@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "@/game/styles.css";
 
 export const metadata: Metadata = {
   title: "Squad Aim Trainer",

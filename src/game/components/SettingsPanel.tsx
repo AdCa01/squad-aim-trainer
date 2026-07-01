@@ -1,6 +1,6 @@
 "use client";
 
-import type { GameSettings } from "@/lib/game-types";
+import type { GameSettings } from "../game-types";
 
 interface SettingsPanelProps {
   settings: GameSettings;

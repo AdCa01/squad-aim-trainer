@@ -3,8 +3,8 @@
 import { useRef, useCallback, useEffect } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import type { GameState, GameAction } from "@/lib/game-types";
-import type { GameSettings } from "@/lib/game-types";
+import type { GameState, GameAction } from "../game-types";
+import type { GameSettings } from "../game-types";
 import TargetManager from "./TargetManager";
 import Particles from "./Particles";
 
